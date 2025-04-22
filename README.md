@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 登录功能
+
+本项目实现了一个简洁美观的登录页面，支持通过GitHub和Google第三方账号登录。
+
+### 功能特点
+
+- 支持GitHub OAuth登录
+- 支持Google OAuth登录
+- 美观的UI界面（使用Tailwind CSS）
+
+### 使用方法
+
+访问 <http://localhost:3000/login> 即可看到登录页面。
+
+### 配置说明
+
+在实际使用前，需要在GitHub和Google开发者平台创建OAuth应用并获取Client ID：
+
+1. 在`services/auth.ts`文件中替换以下内容：
+   - `YOUR_GITHUB_CLIENT_ID` - 替换为你的GitHub OAuth应用ID
+   - `YOUR_REDIRECT_URI` - 替换为你的应用回调地址
+   - `YOUR_GOOGLE_CLIENT_ID` - 替换为你的Google OAuth应用ID
+
 ## Getting Started
 
 First, run the development server:
