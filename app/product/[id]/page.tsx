@@ -2,14 +2,15 @@ import { products } from "@/util/product";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-
+interface Params {
+  id: string;
+}
 interface Props {
-  params: {
-    id: string;
-  };
+  params: Promise<Params>;
 }
 
-const ProductDetailPage = ({ params: { id } }: Props) => {
+const ProductDetailPage = async ({ params }: Props) => {
+  const { id } = await params;
   const product = products.find((el) => el.id === id);
 
   if (!product) {
