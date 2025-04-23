@@ -15,10 +15,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "@/schemas/index";
 import { Button } from "../ui/button";
-import { register } from "@/actions/register";
+import { register } from "@/actions/auth/register";
 import { CODE } from "@/lib/code";
 import { FormSuccess } from "../form-success";
 import { FormError } from "../form-error";
+
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [successMessage, setSuccessMessage] = useState("");

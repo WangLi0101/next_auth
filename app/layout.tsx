@@ -3,6 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -18,6 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en">
       <body
@@ -26,7 +28,7 @@ export default async function RootLayout({
           geistMono.variable
         )}
       >
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>
   );

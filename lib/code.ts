@@ -4,4 +4,6 @@ export const enum CODE {
   USEREXIST = 2,
   USERNOTFOUND = 3,
   PASSWORDINCORRECT = 4,
+  LOGINERROR = 5,
+  ERROR = 6,
 }

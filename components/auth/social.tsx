@@ -4,9 +4,10 @@ import { FcGoogle } from "react-icons/fc";
 import React from "react";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "@/route";
 export const Social = () => {
   const handlerClick = (provider: "google" | "github") => {
-    signIn(provider, { redirectTo: "/" });
+    signIn(provider, { redirectTo: DEFAULT_LOGIN_REDIRECT });
   };
   return (
     <div className="flex items-center justify-between w-full gap-x-2">

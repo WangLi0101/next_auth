@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CardWrapper } from "./card-wrapper";
 import {
   Form,
@@ -15,7 +15,25 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schemas/index";
 import { Button } from "../ui/button";
+import { login } from "@/actions/auth/login";
+import { FormSuccess } from "../form-success";
+import { FormError } from "../form-error";
+import { CODE } from "@/lib/code";
+import { useRouter, useSearchParams } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/route";
 export const LoginForm = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (error) {
+      setErrorMessage(error);
+    }
+  }, [searchParams]);
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -23,8 +41,17 @@ export const LoginForm = () => {
       password: "",
     },
   });
-  const onSubmit = (data: z.infer<typeof LoginSchema>) => {
-    console.log(data);
+
+  const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+    setSuccessMessage("");
+    setErrorMessage("");
+    const res = await login(data);
+    if (res.code === CODE.SUCCESS) {
+      router.push(DEFAULT_LOGIN_REDIRECT);
+    } else {
+      setErrorMessage(res.message!);
+      return;
+    }
   };
   return (
     <div>
@@ -64,6 +91,8 @@ export const LoginForm = () => {
                 </FormItem>
               )}
             />
+            <FormSuccess message={successMessage} />
+            <FormError message={errorMessage} />
             <Button type="submit" className="w-full">
               Login
             </Button>

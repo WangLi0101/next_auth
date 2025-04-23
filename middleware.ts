@@ -1,12 +1,14 @@
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
-import { apiAuthPrefix, whiteList } from "./route";
+import { apiAuthPrefix, DEFAULT_LOGIN_REDIRECT, whiteList } from "./route";
 const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const isAuth = !!req.auth;
   const { nextUrl } = req;
   const pathname = nextUrl.pathname;
   const referer = req.headers.get("referer");
+  console.log(isAuth);
+
   if (pathname.startsWith(apiAuthPrefix)) {
     return;
   }
@@ -14,7 +16,9 @@ export default auth((req) => {
     return Response.redirect(new URL("/auth/login", nextUrl));
   }
   if (isAuth && whiteList.includes(pathname)) {
-    return Response.redirect(new URL(referer || "/", nextUrl));
+    return Response.redirect(
+      new URL(referer || DEFAULT_LOGIN_REDIRECT, nextUrl)
+    );
   }
 });
 
