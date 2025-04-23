@@ -7,3 +7,9 @@ export const LoginSchema = z.object({
     message: "Password is required",
   }),
 });
+
+export const RegisterSchema = LoginSchema.extend({
+  name: z.string().min(3, {
+    message: "Name is required",
+  }),
+});

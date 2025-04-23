@@ -1,2 +1,2 @@
 export const apiAuthPrefix = "/api/auth";
-export const whiteList = ["/auth/login"];
+export const whiteList = ["/auth/login", "/auth/register"];

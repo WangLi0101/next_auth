@@ -1,0 +1,7 @@
+export const enum CODE {
+  SUCCESS = 0,
+  VALIDATEERROR = 1,
+  USEREXIST = 2,
+  USERNOTFOUND = 3,
+  PASSWORDINCORRECT = 4,
+}
