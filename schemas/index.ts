@@ -13,3 +13,12 @@ export const RegisterSchema = LoginSchema.extend({
     message: "Name is required",
   }),
 });
+
+export const Form2faSchema = z.object({
+  code: z.string().min(6, {
+    message: "Code is required",
+  }),
+  email: z.string().email({
+    message: "Email is required",
+  }),
+});

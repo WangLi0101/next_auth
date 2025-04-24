@@ -6,4 +6,5 @@ export const enum CODE {
   PASSWORDINCORRECT = 4,
   LOGINERROR = 5,
   ERROR = 6,
+  TWOFA = 7,
 }

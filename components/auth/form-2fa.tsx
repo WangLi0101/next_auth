@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CardWrapper } from "./card-wrapper";
 import {
   Form,
@@ -13,83 +13,56 @@ import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/schemas/index";
+import { Form2faSchema } from "@/schemas/index";
 import { Button } from "../ui/button";
-import { login } from "@/actions/auth/login";
 import { FormSuccess } from "../form-success";
 import { FormError } from "../form-error";
 import { CODE } from "@/lib/code";
+import { login2fa } from "@/actions/auth/login";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/route";
-export const LoginForm = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+export const Form2fa = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    const error = searchParams.get("error");
-    if (error) {
-      setErrorMessage(error);
-    }
-  }, [searchParams]);
-
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  const form = useForm<z.infer<typeof Form2faSchema>>({
+    resolver: zodResolver(Form2faSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      code: "",
+      email: email!,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof Form2faSchema>) => {
     setSuccessMessage("");
     setErrorMessage("");
-    const res = await login(data);
-
-    if (res.code === CODE.TWOFA) {
-      router.push(`/auth/2fa?email=${data.email}`);
-      return;
-    }
+    const res = await login2fa(data);
     if (res.code === CODE.SUCCESS) {
       router.push(DEFAULT_LOGIN_REDIRECT);
     } else {
-      setErrorMessage(res.message!);
-      return;
+      setErrorMessage(res.message);
     }
   };
   return (
     <div>
       <CardWrapper
-        headerLabel="Welcome Back!"
-        backButtonLabel="Don't have an account?"
-        backButtonHref="/auth/register"
+        headerLabel="2FA"
+        backButtonLabel="go to the login page"
+        backButtonHref="/auth/login"
         showSocial
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="email"
+              name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Code</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Password" {...field} />
+                    <Input placeholder="Code" {...field} />
                   </FormControl>
 
                   <FormMessage />

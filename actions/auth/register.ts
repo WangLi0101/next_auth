@@ -38,6 +38,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       email,
       name,
       password: ecodedPassword,
+      is2fa: true,
       roles: {
         create: [
           {

@@ -20,8 +20,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -47,6 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   roles         UserOnRoles[] // 关联表 UserOnRoles
+  is2fa         Boolean       @default(false)
 
   @@map("users")
 }

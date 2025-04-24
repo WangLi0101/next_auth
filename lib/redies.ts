@@ -22,3 +22,7 @@ export const setRedis = async (key: string, value: string, ttl?: number) => {
 export const getRedis = async (key: string) => {
   return await redis.get(key);
 };
+
+export const delRedies = async (key: string) => {
+  return await redis.del(key);
+};
