@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -20,6 +21,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+
   return (
     <html lang="en">
       <body
@@ -28,7 +30,13 @@ export default async function RootLayout({
           geistMono.variable
         )}
       >
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider
+          session={session}
+          refetchInterval={5 * 60}
+          refetchOnWindowFocus={true}
+        >
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

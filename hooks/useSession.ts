@@ -7,8 +7,6 @@ export const useSession = () => {
   const [session, setSession] = useState<Session | null>(null);
   const getSessionInfo = async () => {
     const res = await getSession();
-    console.log(res);
-
     if (res) {
       setSession(res);
     }

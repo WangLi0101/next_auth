@@ -15,8 +15,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     async session({ session, token }) {
-      console.log("session", session);
-      console.log("token", token);
       const sub = token.sub;
       const roles = await getRolesByUserId(sub!);
       return {
@@ -24,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         user: {
           ...session.user,
           id: sub!,
-          roles: roles,
+          roles: roles?.map((el) => el.roleKey),
         },
       };
     },

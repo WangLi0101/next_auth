@@ -7,7 +7,6 @@ export default auth((req) => {
   const { nextUrl } = req;
   const pathname = nextUrl.pathname;
   const referer = req.headers.get("referer");
-  console.log(isAuth);
 
   if (pathname.startsWith(apiAuthPrefix)) {
     return;
