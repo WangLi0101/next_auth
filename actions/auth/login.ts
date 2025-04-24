@@ -3,6 +3,7 @@ import { signIn } from "@/auth";
 import { verify } from "@/lib/argon2";
 import { CODE } from "@/lib/code";
 import { prisma } from "@/lib/db";
+import { setRedis } from "@/lib/redies";
 import { LoginSchema } from "@/schemas";
 import { z } from "zod";
 export const login = async (values: z.infer<typeof LoginSchema>) => {
@@ -48,4 +49,9 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     code: CODE.SUCCESS,
     message: "Login success",
   };
+};
+
+export const setCode = async () => {
+  const res = await setRedis("code", "123456");
+  return res;
 };
