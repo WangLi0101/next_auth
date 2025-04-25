@@ -35,7 +35,10 @@ export const Role = () => {
 
   // Delete
   const del = (role_key: string) => {
-    MessageBox({ title: "Confirm Delete?", desc: "" })
+    MessageBox({
+      title: "Delete Role",
+      desc: "Are you sure you want to delete this role?",
+    })
       .then(async () => {
         const res = await delRole(role_key);
         if (res.code === 0) {
