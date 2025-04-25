@@ -24,7 +24,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     };
   }
   const ecodedPassword = await ecode(password);
-  // 获取角色
+  // Get roles
   const role = await getRoleByRoleKey(DEFAULT_ROLE_KEY);
   if (!role) {
     return {
@@ -32,7 +32,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       message: "Role not found",
     };
   }
-  // 存储用户
+  // Store user
   await prisma.user.create({
     data: {
       email,

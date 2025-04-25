@@ -36,11 +36,11 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       message: "Password incorrect",
     };
   }
-  // 如果需要2次认证
+  // If 2-factor authentication is needed
   if (user.is2fa) {
     const token = generateCode();
     await sendTwoFactoryEmail(email, token);
-    // 将token存储到redis
+    // Store token in redis
     await setRedis(email, token, 5 * 60);
     return {
       code: CODE.TWOFA,

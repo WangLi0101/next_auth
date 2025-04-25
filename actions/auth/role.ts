@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db";
 import { AddRoleSchema } from "@/schemas";
 import { z } from "zod";
 
-// 获取所有角色
+// Get all roles
 export const getRoles = async () => {
   const res = await getAllRoles();
   return {
@@ -14,7 +14,7 @@ export const getRoles = async () => {
   };
 };
 
-// 删除角色
+// Delete role
 export const delRole = async (roleKey: string) => {
   try {
     await prisma.role.delete({
@@ -25,16 +25,16 @@ export const delRole = async (roleKey: string) => {
   } catch {
     return {
       code: CODE.ERROR,
-      message: "外键约束",
+      message: "Foreign key constraint",
     };
   }
   return {
     code: CODE.SUCCESS,
-    message: "删除成功",
+    message: "Delete successful",
   };
 };
 
-// 新增角色
+// Add role
 export const addRole = async (values: z.infer<typeof AddRoleSchema>) => {
   const isValidate = AddRoleSchema.safeParse(values);
   if (!isValidate) {
@@ -58,7 +58,7 @@ export const addRole = async (values: z.infer<typeof AddRoleSchema>) => {
   };
 };
 
-// 编辑角色
+// Edit role
 export const editRole = async (values: z.infer<typeof AddRoleSchema>) => {
   const validate = AddRoleSchema.safeParse(values);
   if (!validate.success) {

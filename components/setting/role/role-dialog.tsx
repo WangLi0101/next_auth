@@ -86,7 +86,7 @@ export const RoleDialog = ({ isEdit, open, setOpen, getList, role }: Props) => {
     <Dialog open={open} onOpenChange={openChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{isEdit ? "编辑" : "新增"}角色</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit" : "Add"} Role</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -117,16 +117,12 @@ export const RoleDialog = ({ isEdit, open, setOpen, getList, role }: Props) => {
               )}
             />
             <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setOpen(false)}
-              >
-                取消
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                Cancel
               </Button>
               <Button type="submit" disabled={isPending}>
                 {isPending && <Loader2 className="animate-spin" />}
-                确定
+                Confirm
               </Button>
             </DialogFooter>
           </form>

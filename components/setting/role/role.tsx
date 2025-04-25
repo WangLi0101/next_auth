@@ -33,9 +33,9 @@ export const Role = () => {
     getList();
   }, []);
 
-  // 删除
+  // Delete
   const del = (role_key: string) => {
-    MessageBox({ title: "确定要删除吗？", desc: "" })
+    MessageBox({ title: "Confirm Delete?", desc: "" })
       .then(async () => {
         const res = await delRole(role_key);
         if (res.code === 0) {
@@ -47,14 +47,14 @@ export const Role = () => {
       .catch(() => {});
   };
 
-  // 新增
+  // Add
   const add = () => {
     setIsEdit(false);
     setCurrentRole(null);
     setOpen(true);
   };
 
-  // 编辑
+  // Edit
   const edit = (role: Role) => {
     setIsEdit(true);
     setCurrentRole(role);
@@ -63,7 +63,7 @@ export const Role = () => {
   return (
     <div>
       <div className="operator flex flex-row-reverse mb-4">
-        <Button onClick={add}>新增</Button>
+        <Button onClick={add}>Add</Button>
       </div>
       <div className="table w-full">
         <Table>
@@ -71,7 +71,7 @@ export const Role = () => {
             <TableRow>
               <TableHead>role_key</TableHead>
               <TableHead>name</TableHead>
-              <TableHead className="w-[150px]">操作</TableHead>
+              <TableHead className="w-[150px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -81,10 +81,10 @@ export const Role = () => {
                 <TableCell>{invoice.name}</TableCell>
                 <TableCell>
                   <Button variant="link" onClick={() => edit(invoice)}>
-                    编辑
+                    Edit
                   </Button>
                   <Button variant="link" onClick={() => del(invoice.roleKey)}>
-                    删除
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

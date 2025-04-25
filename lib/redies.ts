@@ -6,7 +6,7 @@ const redis = new Redis({
   password: "root123.",
   connectTimeout: 10000,
   retryStrategy: (times) => {
-    console.log(`重试连接 Redis，第 ${times} 次尝试`);
+    console.log(`Retrying Redis connection, attempt ${times}`);
     return Math.min(times * 100, 3000);
   },
 });

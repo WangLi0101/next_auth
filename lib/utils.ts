@@ -7,13 +7,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// 格式化时间
+// Format time
 export function formatDate(date: string | number | Date | undefined) {
   if (!date) return date;
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
-// 生成不重复的6位验证码
+// Generate unique 6-digit verification code
 export function generateCode() {
   return crypto.randomInt(100000, 999999).toString();
 }
