@@ -16,3 +16,8 @@ export const getRolesByUserId = async (userId: string) => {
   });
   return roles?.roles;
 };
+
+export const getAllRoles = async () => {
+  const roles = await prisma.role.findMany();
+  return roles;
+};

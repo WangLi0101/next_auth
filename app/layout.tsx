@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -36,6 +37,7 @@ export default async function RootLayout({
           refetchOnWindowFocus={true}
         >
           {children}
+          <Toaster richColors />
         </SessionProvider>
       </body>
     </html>

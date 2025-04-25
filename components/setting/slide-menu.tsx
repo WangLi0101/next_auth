@@ -5,9 +5,9 @@ export function SlideMenu({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <main className="h-full flex flex-col flex-1">
         <SidebarTrigger />
-        {children}
+        <div className="p-5 flex-1 overflow-auto">{children}</div>
       </main>
     </SidebarProvider>
   );

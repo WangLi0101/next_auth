@@ -14,5 +14,5 @@ export const useSession = () => {
   useEffect(() => {
     getSessionInfo();
   }, []);
-  return { session };
+  return { session: session };
 };
