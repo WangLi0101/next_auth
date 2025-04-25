@@ -1,4 +1,4 @@
-import { Role } from "@/components/setting/role";
+import { Role } from "@/components/setting/role/role";
 
 const Page = () => {
   return (

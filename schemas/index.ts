@@ -22,3 +22,12 @@ export const Form2faSchema = z.object({
     message: "Email is required",
   }),
 });
+
+export const AddRoleSchema = z.object({
+  roleKey: z.string().min(3, {
+    message: "RoleKey is required",
+  }),
+  name: z.string().min(3, {
+    message: "Name is required",
+  }),
+});
