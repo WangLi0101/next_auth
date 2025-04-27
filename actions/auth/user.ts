@@ -38,3 +38,21 @@ export const changeUser2fa = async (id: string) => {
     data: null,
   };
 };
+
+// 删除用户
+export const delUser = async (id: string) => {
+  try {
+    await prisma.user.delete({
+      where: { id },
+    });
+  } catch {
+    return {
+      code: CODE.ERROR,
+      message: "Foreign key constraint",
+    };
+  }
+  return {
+    code: CODE.SUCCESS,
+    message: "Delete successful",
+  };
+};

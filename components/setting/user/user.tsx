@@ -1,5 +1,5 @@
 "use client";
-import { changeUser2fa, getAllUsers } from "@/actions/auth/user";
+import { changeUser2fa, delUser, getAllUsers } from "@/actions/auth/user";
 import { CODE } from "@/lib/code";
 import { useEffect, useState } from "react";
 import { User as UserType } from "@prisma/client";
@@ -49,6 +49,22 @@ export const User = () => {
       })
       .catch(() => {});
   };
+
+  const del = async (id: string) => {
+    MessageBox({
+      title: "Delete",
+      desc: "Are you sure want to delete?",
+    })
+      .then(async () => {
+        const res = await delUser(id);
+        if (res.code === 0) {
+          getUsers();
+        } else {
+          toast.error(res.message);
+        }
+      })
+      .catch(() => {});
+  };
   return (
     <div className="p-4">
       <div className="table w-full mb-4">
@@ -58,7 +74,7 @@ export const User = () => {
               <TableHead>name</TableHead>
               <TableHead>email</TableHead>
               <TableHead>is2Fa</TableHead>
-              <TableHead>actions</TableHead>
+              <TableHead className="w-[200px]">actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -69,7 +85,9 @@ export const User = () => {
                 <TableCell>{invoice.is2fa ? "是" : "否"}</TableCell>
                 <TableCell>
                   <Button variant="link">Edit</Button>
-                  <Button variant="link">Delete</Button>
+                  <Button variant="link" onClick={() => del(invoice.id)}>
+                    Delete
+                  </Button>
                   <Button
                     variant="link"
                     disabled={!invoice.password}
