@@ -19,3 +19,20 @@ export const getUserById = async (id: string) => {
   });
   return res;
 };
+
+export const getUsersByPage = async ({
+  page,
+  pageSize,
+}: {
+  page: number;
+  pageSize: number;
+}) => {
+  const [list, total] = await Promise.all([
+    prisma.user.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.user.count(),
+  ]);
+  return { list, total };
+};

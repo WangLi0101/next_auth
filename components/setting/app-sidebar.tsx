@@ -44,7 +44,7 @@ const menuList = [
       },
       {
         name: "用户管理",
-        href: "/setting/user",
+        href: "/setting/system/user",
       },
       {
         name: "权限管理",
