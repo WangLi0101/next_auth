@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { CardWrapper } from "./card-wrapper";
 import {
   Form,
@@ -21,12 +21,13 @@ import { FormError } from "../form-error";
 import { CODE } from "@/lib/code";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/route";
+import { Loader2 } from "lucide-react";
 export const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [isPending, startTransition] = useTransition();
   useEffect(() => {
     const error = searchParams.get("error");
     if (error) {
@@ -43,20 +44,22 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
-    setSuccessMessage("");
-    setErrorMessage("");
-    const res = await login(data);
+    startTransition(async () => {
+      setSuccessMessage("");
+      setErrorMessage("");
+      const res = await login(data);
 
-    if (res.code === CODE.TWOFA) {
-      router.push(`/auth/2fa?email=${data.email}`);
-      return;
-    }
-    if (res.code === CODE.SUCCESS) {
-      router.push(DEFAULT_LOGIN_REDIRECT);
-    } else {
-      setErrorMessage(res.message!);
-      return;
-    }
+      if (res.code === CODE.TWOFA) {
+        router.push(`/auth/2fa?email=${data.email}`);
+        return;
+      }
+      if (res.code === CODE.SUCCESS) {
+        router.push(DEFAULT_LOGIN_REDIRECT);
+      } else {
+        setErrorMessage(res.message!);
+        return;
+      }
+    });
   };
   return (
     <div>
@@ -98,7 +101,8 @@ export const LoginForm = () => {
             />
             <FormSuccess message={successMessage} />
             <FormError message={errorMessage} />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending && <Loader2 className="animate-spin" />}
               Login
             </Button>
           </form>
