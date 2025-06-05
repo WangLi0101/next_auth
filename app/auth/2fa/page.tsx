@@ -1,9 +1,12 @@
 import { Form2fa } from "@/components/auth/form-2fa";
+import { Suspense } from "react";
 
 const Page = () => {
   return (
     <div>
-      <Form2fa />
+      <Suspense>
+        <Form2fa />
+      </Suspense>
     </div>
   );
 };

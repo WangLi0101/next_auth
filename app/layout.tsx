@@ -13,7 +13,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "home",
-  description: "betterme blog",
+  description:
+    "Welcome to my personal homepage where I share insights on frontend development, React, technology growth, and life reflections. Explore high-quality blog posts, discover the latest programming tips, and keep progressing every day.",
 };
 
 export default function RootLayout({
