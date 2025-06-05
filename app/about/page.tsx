@@ -1,11 +1,15 @@
 import { Tag } from "@/components/about/tag";
 import ThemPhoto from "@/components/home/them-photo";
 import { Icon } from "@iconify/react";
+import { Metadata } from "next";
 import Image from "next/image";
 const skills = ["Vue", "React", "NestJS", "TypeScript", "Node.js", "Electron"];
 const githubUsername = "WangLi0101";
 const email = "uer1366197226@gmail.com";
-
+export const metadata: Metadata = {
+  title: "About Me",
+  description: "About Me",
+};
 const AboutPage = () => {
   return (
     <div className="flex items-center w-[80%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-full max-md:justify-center">
