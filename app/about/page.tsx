@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 const AboutPage = () => {
   return (
-    <div className="flex items-center w-[80%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-full max-md:justify-center">
+    <div className="flex items-center w-[70%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-full max-md:justify-center">
       <div
         className="left w-1/2 max-md:w-full max-md:mt-10 max-md:hidden"
         data-aos="zoom-in"

@@ -4,5 +4,8 @@ export const whiteList = [
   "/auth/register",
   "/auth/error",
   "/auth/2fa",
+  "/",
+  "/about",
+  "/blog",
 ];
 export const DEFAULT_LOGIN_REDIRECT = "/setting";
