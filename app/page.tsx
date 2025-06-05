@@ -1,8 +1,11 @@
 import { Button } from "@/components/home/button";
 import { Footer } from "@/components/home/footer";
-import ThemPhoto from "@/components/home/them-photo";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+const ThemPhoto = dynamic(() => import("@/components/home/them-photo"), {
+  loading: () => <div>Loading...</div>,
+});
 export const metadata: Metadata = {
   title: "home",
   description:
@@ -39,7 +42,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="right w-1/2 max-md:w-full max-md:mt-10">
+        <div
+          className="right w-1/2 max-md:w-full max-md:mt-10"
+          data-aos="zoom-in"
+        >
           <ThemPhoto />
         </div>
       </div>

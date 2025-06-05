@@ -5,6 +5,7 @@ import "./theme-var.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/home/header";
+import { Aos } from "@/components/aos";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -30,9 +31,11 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
-        <Header />
-        <div className="content">{children}</div>
-        <Toaster richColors />
+        <Aos>
+          <Header />
+          <div className="content">{children}</div>
+          <Toaster richColors />
+        </Aos>
       </body>
     </html>
   );
