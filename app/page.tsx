@@ -1,11 +1,8 @@
 import { Button } from "@/components/home/button";
 import { Footer } from "@/components/home/footer";
+import ThemPhoto from "@/components/home/them-photo";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-const ThemPhoto = dynamic(() => import("@/components/home/them-photo"), {
-  loading: () => <div>Loading...</div>,
-});
 export const metadata: Metadata = {
   title: "home",
   description:
