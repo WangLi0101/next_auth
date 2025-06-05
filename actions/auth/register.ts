@@ -6,6 +6,7 @@ import { CODE } from "@/lib/code";
 import { prisma } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
 import { z } from "zod";
+import { addRole } from "./role";
 const DEFAULT_ROLE_KEY = "r_admin";
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateFields = RegisterSchema.safeParse(values);
@@ -25,12 +26,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   }
   const ecodedPassword = await ecode(password);
   // Get roles
-  const role = await getRoleByRoleKey(DEFAULT_ROLE_KEY);
+  let role = await getRoleByRoleKey(DEFAULT_ROLE_KEY);
   if (!role) {
-    return {
-      code: CODE.ERROR,
-      message: "Role not found",
-    };
+    await addRole({
+      roleKey: DEFAULT_ROLE_KEY,
+      name: "Admin",
+    });
+    role = await getRoleByRoleKey(DEFAULT_ROLE_KEY);
   }
   // Store user
   await prisma.user.create({
@@ -42,7 +44,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       roles: {
         create: [
           {
-            roleKey: role.roleKey,
+            roleKey: role!.roleKey,
           },
         ],
       },
