@@ -9,7 +9,10 @@ const email = "uer1366197226@gmail.com";
 const AboutPage = () => {
   return (
     <div className="flex items-center w-[80%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-full max-md:justify-center">
-      <div className="left w-1/2 max-md:w-full max-md:mt-10 max-md:hidden">
+      <div
+        className="left w-1/2 max-md:w-full max-md:mt-10 max-md:hidden"
+        data-aos="zoom-in"
+      >
         <ThemPhoto />
       </div>
       <div className="right w-1/2 max-md:w-full p-8 space-y-6 ml-[50px] max-md:ml-0">
