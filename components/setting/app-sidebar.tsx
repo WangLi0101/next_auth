@@ -34,6 +34,21 @@ const menuList = [
     icon: <House className="mr-[10px]" />,
   },
   {
+    name: "博客管理",
+    href: "#",
+    icon: <Settings className="mr-[10px]" />,
+    children: [
+      {
+        name: "标签管理",
+        href: "/setting/blog/tag",
+      },
+      {
+        name: "博客管理",
+        href: "/setting/blog/list",
+      },
+    ],
+  },
+  {
     name: "系统管理",
     href: "#",
     icon: <Settings className="mr-[10px]" />,

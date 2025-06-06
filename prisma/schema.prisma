@@ -47,6 +47,7 @@ model User {
   sessions      Session[]
   roles         UserOnRoles[] // 关联表 UserOnRoles
   is2fa         Boolean       @default(false)
+  Blog          Blog[]
 
   @@map("users")
 }
@@ -76,4 +77,36 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model Tag {
+  id          String        @id @default(cuid())
+  name        String
+  BlogsOnTags BlogsOnTags[]
+
+  @@map("tags")
+}
+
+model Blog {
+  id          String        @id @default(cuid())
+  title       String
+  thumbnail   String
+  description String
+  content     String        @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  BlogsOnTags BlogsOnTags[]
+  authorId    String
+  author      User          @relation(fields: [authorId], references: [id])
+
+  @@map("blogs")
+}
+
+model BlogsOnTags {
+  blogId String
+  tagId  String
+  blog   Blog   @relation(fields: [blogId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([blogId, tagId])
 }
