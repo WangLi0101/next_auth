@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LinkList } from "./link-list";
 import { usePathname } from "next/navigation";
+import { DarkCahnge } from "./dark-change";
 
 export const Header = () => {
   const menuList = [
@@ -39,7 +40,9 @@ export const Header = () => {
           <Image src="/home/logo.svg" alt="logo" width={150} height={50} />
         </Link>
         <LinkList menuList={menuList} />
-        <div className="right flex items-center"></div>
+        <div className="right flex items-center">
+          <DarkCahnge />
+        </div>
       </div>
     </header>
   );

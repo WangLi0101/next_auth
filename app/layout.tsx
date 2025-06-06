@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/home/header";
 import { Aos } from "@/components/aos";
+import { ThemeProvider } from "@/components/theme";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -25,15 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          geistMono.variable
-        )}
+        className={cn("min-h-screen font-sans antialiased", geistMono.variable)}
       >
         <Aos>
-          <Header />
-          <div className="content">{children}</div>
-          <Toaster richColors />
+          <ThemeProvider>
+            <Header />
+            <div className="content">{children}</div>
+            <Toaster richColors />
+          </ThemeProvider>
         </Aos>
       </body>
     </html>

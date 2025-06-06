@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="flex items-center w-[70%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-full max-md:justify-center">
+      <div className="flex items-center w-[70%] mx-auto h-[calc(100dvh-80px)] max-md:flex-col max-md:w-[90%] max-md:justify-center">
         <div className="left w-1/2 max-md:w-full">
           <div className="title">
             <h2
