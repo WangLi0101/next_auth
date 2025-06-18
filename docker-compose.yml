@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  # Next.js 应用
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_demo_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./.env:/app/.env
+    environment:
+      - AUTH_TRUST_HOST=true

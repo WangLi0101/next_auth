@@ -1,9 +1,9 @@
 import { Redis } from "ioredis";
 
 const redis = new Redis({
-  host: "47.120.58.223",
-  port: 6379,
-  password: "root123.",
+  host: process.env.REDIS_HOST || "localhost",
+  port: parseInt(process.env.REDIS_PORT || "6379"),
+  password: process.env.REDIS_PASSWORD || "root123.",
   connectTimeout: 10000,
   retryStrategy: (times) => {
     console.log(`Retrying Redis connection, attempt ${times}`);
